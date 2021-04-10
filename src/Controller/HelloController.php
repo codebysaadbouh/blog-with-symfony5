@@ -17,7 +17,7 @@ class HelloController {
      * @Route("/hello/{name}")
      */
     public function HelloName($name) : Response {
-    return new Response('Hello '.$name); 
+    return new Response('Hello '.$name);
     }
 
 }

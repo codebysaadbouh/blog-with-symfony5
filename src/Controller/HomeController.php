@@ -16,7 +16,7 @@ class HomeController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Article::class);
         $articles = $repository->findAll();
-        dd($articles);
-        return $this->render("home/index.html.twig");
+
+        return $this->render("home/index.html.twig",['articles' => $articles]);
     }
 }
