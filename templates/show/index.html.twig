@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+{% block title %} Home {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-md-center" style="margin-top: 15px">
+            <div class="col-md-4">
+                <div class="img-fluid">
+                    <img src="/assets/blog/images/{{ article.image }}" class="card-img-top" alt="{{ article.title }}">
+                    <p class="date" style="font-size: 12px; font-weight: lighter">Écrit le {{ article.createdAt | date("d/m/Y") }} à  {{ article.createdAt | date("H:i") }} </p>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="content">
+                    <h4>{{ article.title }}</h4>
+                    <p>{{ article.content | raw }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

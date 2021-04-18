@@ -12,7 +12,6 @@ class HelloController {
     public function Hello() : Response{
          return new Response("Hello World"); 
     }
-
     /**
      * @Route("/hello/{name}")
      */

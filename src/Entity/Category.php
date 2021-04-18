@@ -35,13 +35,19 @@ class Category
     private $image;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Article::class, mappedBy="Category")
+     * @ORM\ManyToMany(targetEntity=Article::class, mappedBy="category")
      */
     private $articles;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
 
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -93,6 +99,7 @@ class Category
         return $this->articles;
     }
 
+
     public function addArticle(Article $article): self
     {
         if (!$this->articles->contains($article)) {
@@ -108,6 +115,22 @@ class Category
         if ($this->articles->removeElement($article)) {
             $article->removeCategory($this);
         }
+
+        return $this;
+    }
+
+    public  function __toString(){
+        return $this->title;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

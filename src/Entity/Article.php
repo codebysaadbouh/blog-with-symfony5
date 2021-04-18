@@ -42,17 +42,18 @@ class Article
     /**
      * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="articles")
      */
-    private $Category;
+    private $category;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $Author;
+    private $author;
 
     public function __construct()
     {
-        $this->Category = new ArrayCollection();
+        $this->category = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -113,13 +114,13 @@ class Article
      */
     public function getCategory(): Collection
     {
-        return $this->Category;
+        return $this->category;
     }
 
     public function addCategory(Category $category): self
     {
-        if (!$this->Category->contains($category)) {
-            $this->Category[] = $category;
+        if (!$this->category->contains($category)) {
+            $this->category[] = $category;
         }
 
         return $this;
@@ -127,19 +128,19 @@ class Article
 
     public function removeCategory(Category $category): self
     {
-        $this->Category->removeElement($category);
+        $this->category->removeElement($category);
 
         return $this;
     }
 
     public function getAuthor(): ?User
     {
-        return $this->Author;
+        return $this->author;
     }
 
-    public function setAuthor(?User $Author): self
+    public function setAuthor(?User $author): self
     {
-        $this->Author = $Author;
+        $this->author = $author;
 
         return $this;
     }
