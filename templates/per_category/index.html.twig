@@ -6,7 +6,7 @@
         <div class="row" style="margin-top: 15px">
             <div class="col-lg-9">
                 <div class="row">
-                    {% for article in articles | reverse %}
+                    {% for article in articles %}
                         <div class="col-lg-3 ">
                             <div class="card m-1">
                                 <img src="/assets/blog/images/{{ article.image }}" class="card-img-top" alt="{{ article.title }}">
@@ -21,20 +21,20 @@
                 </div>
             </div>
             <div class="col-lg-3">
-                    <h5>Catégories</h5>
-                    <ul class="list-group">
-                        {% for categorie in categories |reverse %}
-                            {% if categorie.articles | length >= 1 %}
-                                <a href="{{ path('per_category', {'id': categorie.id}) }}">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        {{ categorie.title }}
-                                        <span class="badge badge-primary badge-pill">{{ categorie.articles | length }} article (s)</span>
-                                    </li>
-                                </a>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-                </div>
+                <h5>Catégories</h5>
+                <ul class="list-group">
+                    {% for categorie in categories | reverse %}
+                        {% if categorie.articles | length >= 1 %}
+                            <a href="{{ path('per_category', {'id': categorie.id}) }}">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{ categorie.title }}
+                                    <span class="badge badge-primary badge-pill">{{ categorie.articles | length }} article (s)</span>
+                                </li>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
             </div>
         </div>
+    </div>
 {% endblock %}

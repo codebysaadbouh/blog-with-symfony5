@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>{{ controller_name }} </h1>
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-4">
+            {{ form_row(form.username, {'label':'Nom d\'utilisateur', 'attr':{
+                'placeholder':'your username'
+            }}) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.firstname, {'label':'Prénom', 'attr':{
+                'placeholder':'Your first name'
+            }}) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.lastname, {'label':'Nom', 'attr':{
+                'placeholder':'Your lastname'
+            }}) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_row(form.email, {'label':'Adresse email', 'attr':{
+                'placeholder':'your email address'
+            }}) }}
+        </div>
+        <div class="col-md-12">
+            {{ form_row(form.password, {'label':'Mot de passe', 'attr':{
+                'placeholder':'Your password'
+            }}) }}
+        </div>
+        <div class="col-md-12">
+            {{ form_row(form.passwordConfirm, {'label':'Confirmation mot de passe', 'attr':{
+                'placeholder':'Repeat your password'
+            }}) }}
+        </div>
+    </div>
+        <button type="submit" class="btn btn-outline-success">S'inscrire</button>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

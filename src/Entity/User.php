@@ -6,11 +6,18 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(
+ *     fields={ "email" },
+ *     message= "L'email existe déjà !"
+ * )
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -25,21 +32,27 @@ class User
     private $username;
 
     /**
+     * @Assert\Length(min=3,max=50)
      * @ORM\Column(type="string", length=255)
      */
     private $firstname;
 
     /**
+     * @Assert\Length(min=3,max=50)
      * @ORM\Column(type="string", length=255)
      */
     private $lastname;
 
     /**
+     * @Assert\Email(
+     *     message="L'email '{{ value }}' n`\'est pas valide !"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $email;
 
     /**
+     * @Assert\Length(min=4,max=50)
      * @ORM\Column(type="string", length=255)
      */
     private $password;
@@ -53,6 +66,13 @@ class User
      * @ORM\OneToMany(targetEntity=Article::class, mappedBy="author")
      */
     private $articles;
+
+    /**
+     * @Assert\EqualTo(propertyPath="password", message="Les deux mots de passe doivent être identique")
+     */
+    private $passwordConfirm;
+
+
 
     public function __construct()
     {
@@ -167,7 +187,31 @@ class User
                 $article->setAuthor(null);
             }
         }
-
         return $this;
+    }
+
+    public function getPasswordConfirm() : ?string
+    {
+        return $this->passwordConfirm;
+    }
+
+    public function setPasswordConfirm($passwordConfirm): self
+    {
+        $this->passwordConfirm = $passwordConfirm;
+        return $this;
+    }
+
+    public function getRoles(): array
+    {
+        // TODO: Implement getRoles() method.
+        return['ROLE_USER'];
+    }
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 }

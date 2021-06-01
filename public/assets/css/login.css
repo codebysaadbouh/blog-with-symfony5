@@ -1,0 +1,39 @@
+body, html {
+    height: 100%;
+}
+
+.global-container{
+    min-height: calc(100vh - 56px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: aliceblue;
+}
+
+form{
+    font-size: 14px;
+}
+
+.card-title{ font-weight:300; }
+
+.btn-form{
+    font-size: 14px;
+    margin-top:20px;
+}
+
+
+.login-form{
+    width:330px;
+    margin:20px;
+}
+
+.sign-up{
+    text-align:center;
+    padding:20px 0 0;
+}
+
+.alert{
+    margin-bottom:-30px;
+    font-size: 13px;
+    margin-top:20px;
+}
